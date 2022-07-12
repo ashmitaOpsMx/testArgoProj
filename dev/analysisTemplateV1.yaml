@@ -1,7 +1,7 @@
 piVersion: argoproj.io/v1alpha1
 kind: AnalysisTemplate
 metadata:
-  name: http-benchmark
+  name: analysisTemplateV1
 spec:
   metrics:
   - name: http-benchmark
