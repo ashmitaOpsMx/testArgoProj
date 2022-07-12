@@ -1,12 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Experiment
 metadata:
-  name: example-experiment
+  name: oes-issuegen-exp1
 spec:
   # Duration of the experiment, beginning from when all ReplicaSets became healthy (optional)
   # If omitted, will run indefinitely until terminated, or until all analyses which were marked
   # `requiredForCompletion` have completed.
-  duration: 20m
+  duration: 5m
 
   # Deadline in seconds in which a ReplicaSet should make progress towards becoming available.
   # If exceeded, the Experiment will fail.
@@ -14,58 +14,29 @@ spec:
 
   # List of pod template specs to run in the experiment as ReplicaSets
   templates:
-  - name: purple
-    # Number of replicas to run (optional). If omitted, will run a single replica
+  - name: baseline
+    specRef: stable
     replicas: 1
-    selector:
-      matchLabels:
-        app: canary-demo
-        color: purple
-    template:
-      metadata:
-        labels:
-          app: canary-demo
-          color: purple
-      spec:
-        containers:
-        - name: rollouts-demo
-          image: argoproj/rollouts-demo:purple
+    spec:
+      containers:
+        - name: rollouts-baseline
+          image: docker.io/opsmxdev/issuegen:v3.0.1
           imagePullPolicy: Always
           ports:
-          - name: http
-            containerPort: 8080
-            protocol: TCP
-  - name: orange
+            - containerPort: 8088
+  - name: canary
+    specRef: canary
     replicas: 1
-    minReadySeconds: 10
-    selector:
-      matchLabels:
-        app: canary-demo
-        color: orange
-    template:
-      metadata:
-        labels:
-          app: canary-demo
-          color: orange
-      spec:
-        containers:
-        - name: rollouts-demo
-          image: argoproj/rollouts-demo:orange
+    spec:
+      containers:
+        - name: rollouts-baseline
+          image: docker.io/opsmxdev/issuegen:v3.0.1
           imagePullPolicy: Always
           ports:
-          - name: http
-            containerPort: 8080
-            protocol: TCP
+            - containerPort: 8088
+    
             
   # List of AnalysisTemplate references to perform during the experiment
   analyses:
-  - name: purple
-    templateName: http-benchmark
-    args:
-    - name: host
-      value: purple
-  - name: orange
-    templateName: http-benchmark
-    args:
-    - name: host
-      value: orange
+  - name: analysisTemplateV1
+    templateName: analysisTemplateV1
