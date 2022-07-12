@@ -8,7 +8,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: /app3
+      - path: /cdapp3
         pathType: Prefix
         backend:
           service:
