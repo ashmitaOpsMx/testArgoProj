@@ -3,16 +3,8 @@ kind: Experiment
 metadata:
   name: oes-issuegen-exp1
 spec:
-  # Duration of the experiment, beginning from when all ReplicaSets became healthy (optional)
-  # If omitted, will run indefinitely until terminated, or until all analyses which were marked
-  # `requiredForCompletion` have completed.
   duration: 5m
-
-  # Deadline in seconds in which a ReplicaSet should make progress towards becoming available.
-  # If exceeded, the Experiment will fail.
   progressDeadlineSeconds: 30
-
-  # List of pod template specs to run in the experiment as ReplicaSets
   templates:
   - name: baseline
     specRef: stable
@@ -20,7 +12,7 @@ spec:
     spec:
       containers:
         - name: rollouts-baseline
-          image: docker.io/opsmxdev/issuegen:v3.0.1
+          image: argoproj/rollouts-demo:orange
           imagePullPolicy: Always
           ports:
             - containerPort: 8088
@@ -30,7 +22,7 @@ spec:
     spec:
       containers:
         - name: rollouts-baseline
-          image: docker.io/opsmxdev/issuegen:v3.0.1
+          image: argoproj/rollouts-demo:purple
           imagePullPolicy: Always
           ports:
             - containerPort: 8088
