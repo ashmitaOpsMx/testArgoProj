@@ -69,11 +69,3 @@ spec:
     args:
     - name: host
       value: orange
-  - name: compare-results
-    templateName: compare
-    # If requiredForCompletion is true for an analysis reference, the Experiment will not complete
-    # until this analysis has completed.
-    requiredForCompletion: true
-    args:
-    - name: host
-      value: purple
