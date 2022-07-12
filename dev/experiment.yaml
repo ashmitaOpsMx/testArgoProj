@@ -7,7 +7,6 @@ spec:
   progressDeadlineSeconds: 30
   templates:
   - name: baseline
-    specRef: stable
     replicas: 1
     spec:
       containers:
@@ -17,7 +16,6 @@ spec:
           ports:
             - containerPort: 8088
   - name: canary
-    specRef: canary
     replicas: 1
     spec:
       containers:
