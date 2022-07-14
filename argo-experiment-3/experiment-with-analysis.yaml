@@ -37,8 +37,8 @@ spec:
           image: argoproj/rollouts-demo:orange
           imagePullPolicy: Always
   analyses:
-  - name: prom-request-rate
-    templateName: prom-request-rate
+  - name: mann-whitney
+    templateName: mann-whitney
     args:
     - name: start-time
       value: "{{experiment.availableAt}}"
