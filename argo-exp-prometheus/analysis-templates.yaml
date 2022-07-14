@@ -26,6 +26,21 @@ spec:
           backoffLimit: 0
     count: 1
 ---
+kind: AnalysisTemplate
+metadata:
+  name: prom-request-rate
+spec:
+  metrics:
+  - name: request-rate
+    interval: 1m
+    successCondition: result[0] >= 0.95
+    failureLimit: 3
+    provider:
+      prometheus:
+        address: https://prometheus.aoa.oes.opsmx.org
+        query: |
+          sum(rate(http_server_requests_seconds_bucket{kubernetes_pod_name=~".*"}[1m]))
+---
 # This AnalysisTemplate will run a Kubernetes Job every 5 seconds, with a 50% chance of failure.
 # When the number of accumulated failures exceeds failureLimit, it will cause the analysis run to
 # fail, and subsequently cause the rollout or experiment to abort.
