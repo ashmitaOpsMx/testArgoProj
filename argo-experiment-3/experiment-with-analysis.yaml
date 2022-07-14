@@ -7,17 +7,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Experiment
 metadata:
-  name: experiment-with-analysis-2
+  name: experiment-with-analysis-3
 spec:
   templates:
   - name: green
     selector:
       matchLabels:
-        app: rollouts-demo-exp-2
+        app: rollouts-demo-exp-3
     template:
       metadata:
         labels:
-          app: rollouts-demo-exp-2
+          app: rollouts-demo-exp-3
       spec:
         containers:
         - name: rollouts-demo-exp
@@ -26,11 +26,11 @@ spec:
   - name: orange
     selector:
       matchLabels:
-        app: rollouts-demo-exp-2
+        app: rollouts-demo-exp-3
     template:
       metadata:
         labels:
-          app: rollouts-demo-exp-2
+          app: rollouts-demo-exp-3
       spec:
         containers:
         - name: rollouts-demo-exp
