@@ -51,3 +51,20 @@ spec:
                 args: [FLIP=$(($(($RANDOM%10))%2)) && exit $FLIP]
               restartPolicy: Never
           backoffLimit: 0
+---
+kind: AnalysisTemplate
+apiVersion: argoproj.io/v1alpha1
+metadata:
+  name: prom-request-rate
+spec:
+  metrics:
+  - name: request-rate
+    count: 5
+    interval: 1m
+    successCondition: result[0] <= 69.0
+    failureLimit: 3
+    provider:
+      prometheus:
+        address: https://prometheus.aoa.oes.opsmx.org
+        query: |
+          sum(rate(http_server_requests_seconds_bucket{kubernetes_pod_name=~".*"}[1m]))
