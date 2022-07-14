@@ -83,6 +83,7 @@ spec:
         canaryConfigName: prom-config
         metricsAccountName: my-prometheus-account
         storageAccountName: in-memory-store-account
+        configurationAccountName: my-prometheus-account
         scopes:
         - name: default
           controlScope:
@@ -97,7 +98,7 @@ spec:
             start: "{{args.start-time}}"
             end: "{{args.end-time}}"
             region: "us-east-1"
-        thresholds:
+        threshold:
           pass: 70
           marginal: 50
     interval: 600
