@@ -81,20 +81,20 @@ spec:
         address: http://localhost:8090
         application: prom-test-app
         canaryConfigName: prom-config
-        thresholds:
-          pass: 70
-          marginal: 50
-        scopes:
-        - name: default
-          controlScope:
-            scope: default
-            step: 60
-            start: "{{args.start-time}}"
-            end: "{{args.end-time}}"
-          experimentScope:
-            scope: default
-            step: 60
-            start: "{{args.start-time}}"
-            end: "{{args.end-time}}"
+      thresholds:
+        pass: 70
+        marginal: 50
+      scopes:
+      - name: default
+        controlScope:
+          scope: default
+          step: 60
+          start: "{{args.start-time}}"
+          end: "{{args.end-time}}"
+        experimentScope:
+          scope: default
+          step: 60
+          start: "{{args.start-time}}"
+          end: "{{args.end-time}}"
     interval: 600
     count: 5
