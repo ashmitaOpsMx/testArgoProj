@@ -41,3 +41,5 @@ spec:
     templateName: random-fail
   - name: pass
     templateName: pass
+  - name: prom-request-rate
+    templateName: prom-request-rate
