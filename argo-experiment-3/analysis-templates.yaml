@@ -83,20 +83,20 @@ spec:
         canaryConfigName: prom-config
         metricsAccountName: my-prometheus-account
         storageAccountName: in-memory-store-account
-      scopes:
-      - name: default
-        controlScope:
-          scope: default
-          step: 60
-          start: "{{args.start-time}}"
-          end: "{{args.end-time}}"
-        experimentScope:
-          scope: default
-          step: 60
-          start: "{{args.start-time}}"
-          end: "{{args.end-time}}"
-      thresholds:
-        pass: 70
-        marginal: 50
+        scopes:
+        - name: default
+          controlScope:
+            scope: default
+            step: 60
+            start: "{{args.start-time}}"
+            end: "{{args.end-time}}"
+          experimentScope:
+            scope: default
+            step: 60
+            start: "{{args.start-time}}"
+            end: "{{args.end-time}}"
+        thresholds:
+          pass: 70
+          marginal: 50
     interval: 600
     count: 5
