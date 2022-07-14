@@ -10,7 +10,7 @@ metadata:
   name: experiment-with-analysis-2
 spec:
   templates:
-  - name: purple
+  - name: yellow
     selector:
       matchLabels:
         app: rollouts-demo-exp-2
@@ -21,7 +21,7 @@ spec:
       spec:
         containers:
         - name: rollouts-demo-exp
-          image: argoproj/rollouts-demo:purple
+          image: argoproj/rollouts-demo:yellow
           imagePullPolicy: Always
   - name: orange
     selector:
