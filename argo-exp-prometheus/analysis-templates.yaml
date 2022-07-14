@@ -32,6 +32,7 @@ metadata:
 spec:
   metrics:
   - name: request-rate
+    count: 5
     interval: 1m
     successCondition: result[0] >= 0.95
     failureLimit: 3
