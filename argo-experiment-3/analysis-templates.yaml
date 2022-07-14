@@ -89,9 +89,12 @@ spec:
           controlScope:
             scope: default
             step: 60
+            start: "{{args.start-time}}"
+            end: "{{args.end-time}}"
           experimentScope:
             scope: default
             step: 60
+            start: "{{args.start-time}}"
+            end: "{{args.end-time}}"
     interval: 600
     count: 5
-    lookback: true
