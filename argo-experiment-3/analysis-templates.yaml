@@ -68,3 +68,31 @@ spec:
         address: https://prometheus.aoa.oes.opsmx.org
         query: |
           sum(rate(http_server_requests_seconds_bucket{kubernetes_pod_name=~".*"}[1m]))
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: mann-whitney
+spec:
+  metrics:
+  - name: mann-whitney
+    provider:
+      kayenta:
+        address: http://localhost:8090/
+        application: prom-test-app
+        canaryConfigName: prom-config
+        interval: 600
+        count: 5
+        # loopback will cause start time value to be equal to start of analysis
+        lookback: true
+        thresholds:
+          pass: 70
+          marginal: 50
+        scopes:
+        - name: default
+          controlScope:
+            scope: default
+            step: 60
+          experimentScope:
+            scope: default
+            step: 60
