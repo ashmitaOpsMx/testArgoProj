@@ -81,8 +81,6 @@ spec:
         address: http://localhost:8090
         application: prom-test-app
         canaryConfigName: prom-config
-
-        lookback: true
         thresholds:
           pass: 70
           marginal: 50
@@ -96,3 +94,4 @@ spec:
             step: 60
     interval: 600
     count: 5
+    lookback: true
