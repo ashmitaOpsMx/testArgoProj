@@ -7,17 +7,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Experiment
 metadata:
-  name: experiment-with-analysis
+  name: experiment-with-analysis-prom
 spec:
   templates:
   - name: purple
     selector:
       matchLabels:
-        app: rollouts-demo-exp
+        app: rollouts-demo-exp-prom
     template:
       metadata:
         labels:
-          app: rollouts-demo-exp
+          app: rollouts-demo-exp-prom
       spec:
         containers:
         - name: rollouts-demo-exp
@@ -37,7 +37,5 @@ spec:
           image: argoproj/rollouts-demo:orange
           imagePullPolicy: Always
   analyses:
-  - name: random-fail
-    templateName: random-fail
-  - name: pass
-    templateName: pass
+  - name: prom-request-rate
+    templateName: prom-request-rate
