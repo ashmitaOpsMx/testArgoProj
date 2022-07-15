@@ -11,7 +11,7 @@ metadata:
 spec:
   duration: 10m
   templates:
-  - name: green
+  - name: yellow
     selector:
       matchLabels:
         app: rollouts-demo-exp-3
@@ -22,7 +22,7 @@ spec:
       spec:
         containers:
         - name: rollouts-demo-exp
-          image: argoproj/rollouts-demo:green
+          image: argoproj/rollouts-demo:yellow
           imagePullPolicy: Always
   - name: orange
     selector:
