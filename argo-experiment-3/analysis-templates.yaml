@@ -89,14 +89,14 @@ spec:
           controlScope:
             scope: default
             step: 60
-            start: "{{args.start-time}}"
-            end: "{{args.end-time}}"
+            start: "2022-07-14T06:30:00Z"
+            end: "2022-07-14T07:00:00Z"
             region: "us-east-1"
           experimentScope:
             scope: default
             step: 60
-            start: "{{args.start-time}}"
-            end: "{{args.end-time}}"
+            start: "2022-07-14T06:30:00Z"
+            end: "2022-07-14T07:00:00Z"
             region: "us-east-1"
         threshold:
           pass: 70
