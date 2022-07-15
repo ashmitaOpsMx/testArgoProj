@@ -3,6 +3,9 @@ kind: AnalysisTemplate
 metadata:
   name: mann-whitney
 spec:
+  args:
+  - name: start-time
+  - name: end-time
   metrics:
   - name: mann-whitney
     provider:
@@ -18,14 +21,14 @@ spec:
           controlScope:
             scope: default
             step: 60
-            start: 2022-07-14T06:30:00Z
-            end: 2022-07-14T07:00:00Z
+            start: "{{args.start-time}}"
+            end: "{{args.end-time}}"
             region: default
           experimentScope:
             scope: default
             step: 60
-            start: 2022-07-14T06:30:00Z
-            end: 2022-07-14T07:00:00Z
+            start: "{{args.start-time}}"
+            end: "{{args.end-time}}"
             region: default
         threshold:
           pass: 70
