@@ -9,6 +9,7 @@ kind: Experiment
 metadata:
   name: experiment-with-analysis-3
 spec:
+  duration: 10m
   templates:
   - name: green
     selector:
