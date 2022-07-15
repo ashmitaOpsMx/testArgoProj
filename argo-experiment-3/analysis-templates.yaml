@@ -83,21 +83,21 @@ spec:
         canaryConfigName: prom-config
         metricsAccountName: my-prometheus-account
         storageAccountName: in-memory-store-account
-        configurationAccountName: my-prometheus-account
+        configurationAccountName: in-memory-store-account
         scopes:
         - name: default
           controlScope:
             scope: default
             step: 60
-            start: "2022-07-14T06:30:00Z"
-            end: "2022-07-14T07:00:00Z"
-            region: "us-=east-2"
+            start: 2022-07-14T06:30:00Z
+            end: 2022-07-14T07:00:00Z
+            region: default
           experimentScope:
             scope: default
             step: 60
-            start: "2022-07-14T06:30:00Z"
-            end: "2022-07-14T07:00:00Z"
-            region: "us-=east-2"
+            start: 2022-07-14T06:30:00Z
+            end: 2022-07-14T07:00:00Z
+            region: default
         threshold:
           pass: 70
           marginal: 50
