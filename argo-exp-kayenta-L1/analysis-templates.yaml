@@ -7,25 +7,25 @@ spec:
   - name: start-time
   - name: end-time
   metrics:
-  - name: mann-whitney
+  - name: bucket-rate
     provider:
       kayenta:
         address: https://1f4d-122-166-128-163.in.ngrok.io
         application: prom-test-app
-        canaryConfigName: prom-config
+        canaryConfigName: prom-config-argo
         metricsAccountName: my-prometheus-account
         storageAccountName: in-memory-store-account
         configurationAccountName: in-memory-store-account
         scopes:
         - name: default
           controlScope:
-            scope: default
+            scope: testscope
             step: 60
             start: "{{args.start-time}}"
             end: "{{args.end-time}}"
             region: default
           experimentScope:
-            scope: default
+            scope: testscope
             step: 60
             start: "{{args.start-time}}"
             end: "{{args.end-time}}"
