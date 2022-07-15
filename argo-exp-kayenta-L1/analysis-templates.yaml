@@ -16,22 +16,18 @@ spec:
         metricsAccountName: my-prometheus-account
         storageAccountName: in-memory-store-account
         configurationAccountName: in-memory-store-account
+        threshold:
+          pass: 90
+          marginal: 75
         scopes:
         - name: default
           controlScope:
-            scope: testscope
+            scope: default
             step: 60
             start: "{{args.start-time}}"
             end: "{{args.end-time}}"
-            region: default
           experimentScope:
-            scope: testscope
+            scope: default
             step: 60
             start: "{{args.start-time}}"
             end: "{{args.end-time}}"
-            region: default
-        threshold:
-          pass: 70
-          marginal: 50
-    interval: 60s
-    count: 5
