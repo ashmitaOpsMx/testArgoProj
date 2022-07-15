@@ -89,15 +89,15 @@ spec:
           controlScope:
             scope: default
             step: 60
-            start: "2022-07-14 12:00"
-            end: "2022-07-14 12:30"
-            region: "us-east-1"
+            start: "2022-07-14T06:30:00Z"
+            end: "2022-07-14T07:00:00Z"
+            region: "us-=east-2"
           experimentScope:
             scope: default
             step: 60
-            start: "2022-07-14 12:00"
-            end: "2022-07-14 12:30"
-            region: "us-east-1"
+            start: "2022-07-14T06:30:00Z"
+            end: "2022-07-14T07:00:00Z"
+            region: "us-=east-2"
         threshold:
           pass: 70
           marginal: 50
