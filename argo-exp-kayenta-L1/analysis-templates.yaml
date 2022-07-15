@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: mann-whitney
+spec:
+  metrics:
+  - name: mann-whitney
+    provider:
+      kayenta:
+        address: https://1f4d-122-166-128-163.in.ngrok.io
+        application: prom-test-app
+        canaryConfigName: prom-config
+        metricsAccountName: my-prometheus-account
+        storageAccountName: in-memory-store-account
+        configurationAccountName: in-memory-store-account
+        scopes:
+        - name: default
+          controlScope:
+            scope: default
+            step: 60
+            start: 2022-07-14T06:30:00Z
+            end: 2022-07-14T07:00:00Z
+            region: default
+          experimentScope:
+            scope: default
+            step: 60
+            start: 2022-07-14T06:30:00Z
+            end: 2022-07-14T07:00:00Z
+            region: default
+        threshold:
+          pass: 70
+          marginal: 50
+    interval: 60s
+    count: 5
