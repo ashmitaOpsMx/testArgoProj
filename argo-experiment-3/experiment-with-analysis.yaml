@@ -42,5 +42,3 @@ spec:
     args:
     - name: start-time
       value: "{{experiment.availableAt}}"
-    - name: end-time
-      value: "{{experiment.finishedAt}}"
