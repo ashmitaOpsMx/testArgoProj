@@ -26,8 +26,10 @@ spec:
             step: 60
             start: "{{args.start-time}}"
             end: "{{args.end-time}}"
+            region: us-east-1
           experimentScope:
             scope: default
             step: 60
             start: "{{args.start-time}}"
             end: "{{args.end-time}}"
+            region: us-east-1
