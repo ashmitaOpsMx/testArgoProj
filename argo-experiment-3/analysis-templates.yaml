@@ -101,5 +101,5 @@ spec:
         threshold:
           pass: 70
           marginal: 50
-    interval: 600s
+    interval: 60s
     count: 5
