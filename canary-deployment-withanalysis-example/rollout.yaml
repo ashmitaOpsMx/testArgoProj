@@ -11,7 +11,7 @@ spec:
       - pause: {duration: 10}
       - analysis:
           templates:
-          - templateName: isd-request-rate
+          - templateName: canary-check
       - setWeight: 40
       - pause: {duration: 10}
       - setWeight: 60
