@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: testapp
+spec:
+  metrics:
+    - name: testapp
+      provider:
+        isd:
+          gate_url: https://ds312.isd-dev.opsmx.net/
+          application: testapp
+          baseline_start_time: "2022-07-29T13:15:00Z"
+          canary_start_time: "2022-07-29T13:15:00Z"
+          lifetimeHours: "0.5"
+          threshold:
+            pass: 80
+            marginal: 60
