@@ -10,6 +10,5 @@ spec:
     failureLimit: 1
     provider:
       isd:
-        address: https://prometheus.aoa.oes.opsmx.org
-        query: |
-          sum(rate(http_server_requests_seconds_bucket{kubernetes_pod_name=~".*"}[1m]))
+        Gate_URL: https://ds312.isd-dev.opsmx.net
+        Application: testapp
