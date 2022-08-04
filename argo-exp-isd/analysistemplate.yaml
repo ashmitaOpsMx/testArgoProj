@@ -1,0 +1,15 @@
+kind: AnalysisTemplate
+metadata:
+  name: isd-request-rate
+spec:
+  metrics:
+  - name: isd-request-rate
+    count: 1
+    interval: 1m
+    successCondition: result[0] <= 69.0
+    failureLimit: 3
+    provider:
+      prometheus:
+        address: https://prometheus.aoa.oes.opsmx.org
+        query: |
+          sum(rate(http_server_requests_seconds_bucket{kubernetes_pod_name=~".*"}[1m]))
