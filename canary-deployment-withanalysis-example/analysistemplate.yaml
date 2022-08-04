@@ -1,0 +1,14 @@
+kind: AnalysisTemplate
+metadata:
+  name: isd-request-rate
+spec:
+  metrics:
+  - name: isd-request-rate
+    count: 1
+    interval: 1m
+    successCondition: result[0] <= 69.0
+    failureLimit: 1
+    provider:
+      isd:
+        Gate_URL: https://ds312.isd-dev.opsmx.net
+        Application: testapp
