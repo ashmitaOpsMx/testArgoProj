@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: testapp-isd
+spec:
+  replicas: 5
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: testapp-isd
+  template:
+    metadata:   
+      labels:
+        app: testapp-isd
+    spec:
+      containers:
+        - name: rollouts-demo-exp
+          image: docker.io/opsmxdev/issuegen:v3.0.5
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8088
+  strategy:
+    canary:
+      steps:
+        - setWeight: 20
+        - pause: { duration: 31s }
+        - experiment:
+            templates:
+              - name: baseline
+                specRef: stable
+              - name: canary
+                specRef: canary
+            analyses:
+              - name : testapp
+                requiredForCompletion: true
+                templateName: testapp
