@@ -37,5 +37,5 @@ spec:
           image: argoproj/rollouts-demo:orange
           imagePullPolicy: Always
   analyses:
-  - name: id-request-rate
+  - name: isd-request-rate
     templateName: isd-request-rate
