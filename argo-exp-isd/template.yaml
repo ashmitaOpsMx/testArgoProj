@@ -6,7 +6,7 @@ spec:
   metrics:
     - name: testapp
       provider:
-        ISD:
+        isd:
           gate_url: https://ds312.isd-dev.opsmx.net/
           application: testapp
           baseline_start_time: "2022-07-29T13:15:00Z"
