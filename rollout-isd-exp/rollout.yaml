@@ -3,7 +3,7 @@ kind: Rollout
 metadata:
   name: testapp-isd
 spec:
-  replicas: 5
+  replicas: 3
   revisionHistoryLimit: 2
   selector:
     matchLabels:
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: rollouts-demo-exp
-          image: docker.io/opsmxdev/issuegen:v3.0.5
+          image: docker.io/opsmxdev/issuegen:v3.0.6
           imagePullPolicy: Always
           ports:
             - containerPort: 8088
