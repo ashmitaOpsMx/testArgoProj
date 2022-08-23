@@ -17,10 +17,10 @@ spec:
     spec:
       containers:
       - name: rollouts-demo
-        image: docker.io/opsmxdev/issuegen:v3.0.2
+        image: argoproj/rollouts-demo:blue
         imagePullPolicy: Always
         ports:
-        - containerPort: 8088
+        - containerPort: 8080
   strategy:
     blueGreen: 
       activeService: rollout-bluegreen-active
