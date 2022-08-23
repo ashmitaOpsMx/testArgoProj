@@ -9,7 +9,6 @@ spec:
   metrics:
     - name: isd-analysis-bg-v1
       count: 1
-      initialDelay: 30s
       provider:
         opsmx:
           gateUrl: https://ds312.isd-dev.opsmx.net/
