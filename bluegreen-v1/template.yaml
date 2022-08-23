@@ -1,0 +1,27 @@
+kind: AnalysisTemplate
+apiVersion: argoproj.io/v1alpha1
+metadata:
+  name: isd-analysis-bg-v1
+spec:
+  args:
+    - name: preview-hash
+    - name: baseline-hash
+  metrics:
+    - name: isd-analysis-bg-v1
+      count: 1
+      initialDelay: 30s
+      provider:
+        opsmx:
+          gateUrl: https://ds312.isd-dev.opsmx.net/
+          application: democanaryhashapp
+          user: admin
+          lifetimeHours: "0.05"
+          threshold:
+            pass: 80
+            marginal: 60
+          services:
+          - serviceName: service1
+            gateName: gate1
+            metricScopeVariables: "namespace_key,pod_key"
+            baselineMetricScope: "argocd,.*{{args.baseline-hash}}.*" 
+            canaryMetricScope: "argocd,.*{{args.preview-hash}}.*"
