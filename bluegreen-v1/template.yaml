@@ -21,6 +21,7 @@ spec:
           services:
           - serviceName: service1
             metricTemplateName: PrometheusTemplateTest
+            metricTemplateVersion: "v3.0"
             metricScopeVariables: "namespace_key,pod_key"
             baselineMetricScope: "argocd,.*{{args.baseline-hash}}.*" 
             canaryMetricScope: "argocd,.*{{args.preview-hash}}.*"
