@@ -11,8 +11,8 @@ spec:
       count: 1
       provider:
         opsmx:
-          gateUrl: https://ds312.isd-dev.opsmx.net/
-          application: democanaryhashapp
+          gateUrl: https://isd-demo.argo-dev.opsmx.net//
+          application: demo-bg-app
           user: admin
           lifetimeHours: "0.05"
           threshold:
@@ -20,7 +20,7 @@ spec:
             marginal: 60
           services:
           - serviceName: service1
-            gateName: gate1
+            metricTemplateName: PrometheusTemplateTest
             metricScopeVariables: "namespace_key,pod_key"
             baselineMetricScope: "argocd,.*{{args.baseline-hash}}.*" 
             canaryMetricScope: "argocd,.*{{args.preview-hash}}.*"
