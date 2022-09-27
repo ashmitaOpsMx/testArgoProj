@@ -15,7 +15,7 @@ spec:
           application: demo-bg-app
           user: admin
           lifetimeHours: "0.05"
-          baselineStartTime: "2022-09-26T18:45:35Z"
+          baselineStartTime: "2022-09-26T13:15:35Z"
           threshold:
             pass: 80
             marginal: 60
