@@ -18,7 +18,7 @@ spec:
           application: nr-ss1-exp-app
           user: admin
           baselineStartTime: "{{args.start-time}}"
-          canaryStartTIme: "{{args.start-time}}"
+          canaryStartTime: "{{args.start-time}}"
           endTime: "{{args.end-time}}"
           threshold:
             pass: 80
