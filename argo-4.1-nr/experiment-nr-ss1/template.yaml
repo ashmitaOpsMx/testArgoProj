@@ -11,7 +11,7 @@ spec:
   metrics:
     - name: analysis-isd-for-nr-exp-score
       count: 1
-      initialDelay: 10s
+      initialDelay: 90s
       provider:
         opsmx:
           gateUrl: https://isd-demo.argo-dev.opsmx.net/
