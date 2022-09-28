@@ -1,0 +1,46 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: nr-ss1-canary
+spec:
+  replicas: 4
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: nr-isd-rollout
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus_io_path: '/mgmt/prometheus'
+        prometheus_io_port: '8088'    
+      labels:
+        app: nr-ss1-app
+    spec:
+      containers:
+        - name: nr-ss1-app-v1
+          image: quay.io/opsmxpublic/canary-issuegen:issue-canary-gen-1401
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8088
+          env:
+            - name: NEWRELIC_LICENSE
+              value: 68b87ee3618f714a039cead822d6d250b54dNRAL
+            - name: SERVICE_NAME
+              value: issuegen-ss1
+  strategy:
+    canary:
+      steps:
+        - setWeight: 25
+        - pause: { duration: 60s }
+        - analysis:
+            templates:
+              - templateName: nr-isd-analysis-ss1-canary
+            args:
+              - name: canary-hash
+                valueFrom:
+                  podTemplateHashValue: Latest
+              - name: baseline-hash
+                valueFrom:
+                  podTemplateHashValue: Stable
+        - setWeight: 75
