@@ -48,6 +48,7 @@ spec:
   analyses:
   - name: analysis-isd-for-nr-exp
     requiredForCompletion: true
+    duration: 6m
     templateName: analysis-isd
     args:
     - name: start-time
