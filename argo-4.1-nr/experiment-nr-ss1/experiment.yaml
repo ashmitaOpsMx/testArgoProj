@@ -8,11 +8,11 @@ spec:
   - name: baseline
     selector:
       matchLabels:
-        app: nr-exp-app1
+        app: nr-exp-app
     template:
       metadata:
         labels:
-          app: nr-exp-app1
+          app: nr-exp-app
       spec:
         containers:
         - name: baseline
@@ -24,15 +24,15 @@ spec:
             - name: NEWRELIC_LICENSE
               value: 68b87ee3618f714a039cead822d6d250b54dNRAL
             - name: SERVICE_NAME
-              value: issuegen-exp-ss1-app1
+              value: issuegen-exp-ss1-app
   - name: canary
     selector:
       matchLabels:
-        app: nr-exp-app2
+        app: nr-exp-app
     template:
       metadata:
         labels:
-          app: nr-exp-app2
+          app: nr-exp-app
       spec:
         containers:
         - name: canary
@@ -44,7 +44,7 @@ spec:
             - name: NEWRELIC_LICENSE
               value: 68b87ee3618f714a039cead822d6d250b54dNRAL
             - name: SERVICE_NAME
-              value: issuegen-exp-ss1-app2
+              value: issuegen-exp-ss1-app
   analyses:
   - name: analysis-isd-for-nr-exp
     requiredForCompletion: true
