@@ -9,13 +9,13 @@ spec:
   metrics:
     - name: nr-isd-analysis-ss1-canary-score
       count: 1
-      initialDelay: 2s
+      initialDelay: 10s
       provider:
         opsmx:
           gateUrl: https://isd-demo.argo-dev.opsmx.net/
-          lifetimeHours: "0.25"
           application: nr-ss1-canary-app
           user: admin
+          lifetimeHours: "0.1"
           threshold:
             pass: 80
             marginal: 60
