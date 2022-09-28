@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: nr-ss1-app-v1
-          image: quay.io/opsmxpublic/canary-issuegen:issue-canary-gen-1403
+          image: quay.io/opsmxpublic/canary-issuegen:issue-canary-gen-1401
           imagePullPolicy: Always
           ports:
             - containerPort: 8088
@@ -45,4 +45,14 @@ spec:
                   podTemplateHashValue: Stable
         - setWeight: 75
         - pause: { duration: 60s }
+        - analysis:
+            templates:
+              - templateName: nr-isd-analysis-ss1-canary
+            args:
+              - name: canary-hash
+                valueFrom:
+                  podTemplateHashValue: Latest
+              - name: baseline-hash
+                valueFrom:
+                  podTemplateHashValue: Stable
         - setWeight: 100
