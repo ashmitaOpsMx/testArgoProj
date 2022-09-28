@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: rollout-bluegreen
+  name: nr-exp-app1-ing
   annotations:
     ingress.kubernetes.io/proxy-body-size: 100M
     kubernetes.io/ingress.class: nginx
@@ -15,6 +15,28 @@ spec:
         pathType: ImplementationSpecific
         backend:
           service:
-            name: rollout-bluegreen-active
+            name: nr-exp-app1-svc
+            port:
+              number: 80
+
+---
+
+kind: Ingress
+metadata:
+  name: nr-exp-app2-ing
+  annotations:
+    ingress.kubernetes.io/proxy-body-size: 100M
+    kubernetes.io/ingress.class: nginx
+    ingress.kubernetes.io/app-root: /
+spec:
+  rules:
+  - host: issuegen-exp-app2.autopilot.opsmx.com
+    http:
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: nr-exp-app2-svc
             port:
               number: 80
