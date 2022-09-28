@@ -27,5 +27,5 @@ spec:
           - metricTemplateName: newrelic-validator
             metricTemplateVersion: "v2.0"
             metricScopeVariables: "${app_key},${host_key}"
-            baselineMetricScope: "issuegen-exp-ss1-app1,.*{{args.baseline-hash}}.*"
-            canaryMetricScope: "issuegen-exp-ss1-app2,.*{{args.canary-hash}}.*"
+            baselineMetricScope: "issuegen-exp-ss1,nr-isd-exp-ss1-baseline.*"
+            canaryMetricScope: "issuegen-exp-ss1,nr-isd-exp-ss1-canary.*"
