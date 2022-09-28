@@ -1,7 +1,7 @@
 kind: AnalysisTemplate
 apiVersion: argoproj.io/v1alpha1
 metadata:
-  name: nr-isd-analysis-ss1-canary
+  name: analysis-isd-for-nr-exp
 spec:
   args:
     - name: start-time
@@ -9,13 +9,13 @@ spec:
     - name: canary-hash
     - name: baseline-hash
   metrics:
-    - name: nr-isd-analysis-ss1-canary-score
+    - name: analysis-isd-for-nr-exp-score
       count: 1
       initialDelay: 10s
       provider:
         opsmx:
           gateUrl: https://isd-demo.argo-dev.opsmx.net/
-          application: nr-ss1-canary-app
+          application: nr-ss1-exp-app
           user: admin
           baselineStartTime: "{{args.start-time}}"
           canaryStartTIme: "{{args.start-time}}"
