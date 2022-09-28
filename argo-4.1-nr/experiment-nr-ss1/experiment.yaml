@@ -24,7 +24,7 @@ spec:
             - name: NEWRELIC_LICENSE
               value: 68b87ee3618f714a039cead822d6d250b54dNRAL
             - name: SERVICE_NAME
-              value: issuegen-exp-ss1-app
+              value: issuegen-exp-ss1-app1
   - name: canary
     selector:
       matchLabels:
@@ -44,7 +44,7 @@ spec:
             - name: NEWRELIC_LICENSE
               value: 68b87ee3618f714a039cead822d6d250b54dNRAL
             - name: SERVICE_NAME
-              value: issuegen-exp-ss1-app
+              value: issuegen-exp-ss1-app2
   analyses:
   - name: analysis-isd-for-nr-exp
     requiredForCompletion: true
