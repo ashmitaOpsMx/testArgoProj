@@ -48,7 +48,7 @@ spec:
   analyses:
   - name: analysis-isd-for-nr-exp
     requiredForCompletion: true
-    templateName: analysis-isd
+    templateName: analysis-isd-for-nr-exp
     args:
     - name: start-time
       value: "{{experiment.availableAt}}"
