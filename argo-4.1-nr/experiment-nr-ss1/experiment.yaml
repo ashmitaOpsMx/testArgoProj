@@ -3,7 +3,7 @@ kind: Experiment
 metadata:
   name: runexp-isd
 spec:
-  duration: 3m
+  duration: 6m
   templates:
   - name: baseline
     selector:
@@ -48,7 +48,6 @@ spec:
   analyses:
   - name: analysis-isd-for-nr-exp
     requiredForCompletion: true
-    duration: 6m
     templateName: analysis-isd
     args:
     - name: start-time
