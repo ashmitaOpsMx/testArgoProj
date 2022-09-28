@@ -7,7 +7,7 @@ spec:
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      app: nr-isd-rollout
+      app: nr-ss1-app
   template:
     metadata:
       annotations:
