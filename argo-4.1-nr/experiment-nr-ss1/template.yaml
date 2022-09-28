@@ -1,0 +1,31 @@
+kind: AnalysisTemplate
+apiVersion: argoproj.io/v1alpha1
+metadata:
+  name: nr-isd-analysis-ss1-canary
+spec:
+  args:
+    - name: start-time
+    - name: end-time
+    - name: canary-hash
+    - name: baseline-hash
+  metrics:
+    - name: nr-isd-analysis-ss1-canary-score
+      count: 1
+      initialDelay: 10s
+      provider:
+        opsmx:
+          gateUrl: https://isd-demo.argo-dev.opsmx.net/
+          application: nr-ss1-canary-app
+          user: admin
+          baselineStartTime: "{{args.start-time}}"
+          canaryStartTIme: "{{args.start-time}}"
+          endTime: "{{args.end-time}}"
+          threshold:
+            pass: 80
+            marginal: 60
+          services:
+          - metricTemplateName: newrelic-validator
+            metricTemplateVersion: "v2.0"
+            metricScopeVariables: "${app_key},${host_key}"
+            baselineMetricScope: "issuegen-ss1,.*{{args.baseline-hash}}.*"
+            canaryMetricScope: "issuegen-ss1,.*{{args.canary-hash}}.*"
