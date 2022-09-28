@@ -33,14 +33,6 @@ spec:
       steps:
         - setWeight: 25
         - pause: { duration: 60s }
-        - analysis:
-            templates:
-              - templateName: nr-isd-analysis-ss1-canary
-            args:
-              - name: canary-hash
-                valueFrom:
-                  podTemplateHashValue: Latest
-              - name: baseline-hash
-                valueFrom:
-                  podTemplateHashValue: Stable
         - setWeight: 75
+        - pause: { duration: 60s }
+        - setWeight: 100
