@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Experiment
 metadata:
-  name: runexp-isd
+  name: nr-isd-exp-ss1
 spec:
   duration: 6m
   templates:
