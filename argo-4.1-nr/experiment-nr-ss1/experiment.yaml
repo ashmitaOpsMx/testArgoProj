@@ -8,11 +8,11 @@ spec:
   - name: baseline
     selector:
       matchLabels:
-        app: nr-exp-app
+        app: nr-exp-app1
     template:
       metadata:
         labels:
-          app: nr-exp-app
+          app: nr-exp-app1
       spec:
         containers:
         - name: baseline
@@ -28,11 +28,11 @@ spec:
   - name: canary
     selector:
       matchLabels:
-        app: nr-exp-app
+        app: nr-exp-app2
     template:
       metadata:
         labels:
-          app: nr-exp-app
+          app: nr-exp-app2
       spec:
         containers:
         - name: canary
