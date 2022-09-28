@@ -20,7 +20,7 @@ spec:
               number: 80
 
 ---
-
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: nr-exp-app2-ing
