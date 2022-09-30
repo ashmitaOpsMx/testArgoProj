@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sd-ss1-app-ing
+  annotations:
+    ingress.kubernetes.io/proxy-body-size: 100M
+    kubernetes.io/ingress.class: nginx
+    ingress.kubernetes.io/app-root: /
+spec:
+  rules:
+  - host: issuegen-sd-app-canary.opsmx.net
+    http:
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: sd-ss1-app-svc
+            port:
+              number: 80
