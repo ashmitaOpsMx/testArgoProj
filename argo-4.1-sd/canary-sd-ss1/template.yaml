@@ -15,7 +15,7 @@ spec:
           gateUrl: https://isd-demo.argo-dev.opsmx.net/
           application: sd-ss1-canary-app
           user: admin
-          lifetimeHours: "0.1"
+          lifetimeHours: "0.05"
           threshold:
             pass: 80
             marginal: 60
