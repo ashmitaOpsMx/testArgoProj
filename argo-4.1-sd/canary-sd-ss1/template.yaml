@@ -25,5 +25,5 @@ spec:
           - logTemplateName: stackdriver-validator
             logTemplateVersion: "v2.0"
             logScopeVariables: "resource.labels.pod_name"
-            baselineLogScope: "sd-ss1-canary-596c596b7d-rsrxb"
-            canaryLogScope: "sd-ss1-canary-67d9ddfb45-96ffl"
+            baselineLogScope: "sd-ss1-canary-596c596b7d.*"
+            canaryLogScope: "sd-ss1-canary-67d9ddfb45.*"
