@@ -20,8 +20,7 @@ spec:
             pass: 80
             marginal: 60
           services:
-          - metricTemplateName: newrelic-validator
-            metricTemplateVersion: "v2.0"
-            metricScopeVariables: "${app_key},${host_key}"
-            baselineMetricScope: "issuegen-ss1,.*{{args.baseline-hash}}.*"
-            canaryMetricScope: "issuegen-ss1,.*{{args.canary-hash}}.*"
+          - logTemplateName: stackdriver-validator
+            logScopeVariables: "resource.labels.pod_name"
+            baselineLogScope: ".*{{args.baseline-hash}}.*"
+            canaryLogScope: ".*{{args.canary-hash}}.*"
