@@ -22,5 +22,5 @@ spec:
           services:
           - logTemplateName: stackdriver-validator
             logScopeVariables: "resource.labels.pod_name"
-            baselineLogScope: ".*{{args.baseline-hash}}.*"
-            canaryLogScope: ".*{{args.canary-hash}}.*"
+            baselineLogScope: "sd-ss1-canary-{{args.baseline-hash}}.*"
+            canaryLogScope: "sd-ss1-canary-{{args.canary-hash}}.*"
