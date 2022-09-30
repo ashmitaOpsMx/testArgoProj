@@ -11,7 +11,7 @@ spec:
       count: 1
       initialDelay: 10s
       provider:
-        opsmx:
+        kayenta:
           gateUrl: https://isd-demo.argo-dev.opsmx.net/
           application: sd-ss1-canary-app
           user: admin
