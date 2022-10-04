@@ -22,8 +22,7 @@ spec:
             pass: 80
             marginal: 60
           services:
-          - logTemplateName: stackdriver-validator
-            logTemplateVersion: "v1.0"
+          - logTemplateName: "stacktemplatemd"
             logScopeVariables: "resource.labels.pod_name"
             baselineLogScope: "sd-ss1-canary-67d9ddfb45-5zx89"
             canaryLogScope: "sd-ss1-canary-67d9ddfb45-d7c92"
