@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: sd-ss1-app-v1
-          image: quay.io/opsmxpublic/canary-issuegen:issue-canary-gen-1401
+          image: quay.io/opsmxpublic/canary-issuegen:issue-canary-gen-1402
           imagePullPolicy: Always
           ports:
             - containerPort: 8088
