@@ -12,10 +12,10 @@ spec:
       initialDelay: 10s
       provider:
         opsmx:
-          gateUrl: https://isd-demo.argo-dev.opsmx.net/
+          gateUrl: https://isd-dev.argo-dev.opsmx.net/
           application: sd-ss1-canary-app
-          baselineStartTime: "2022-09-30T10:23:58Z"
-          canaryStartTime: "2022-09-30T10:23:58Z"
+          baselineStartTime: "2022-10-04T10:10:09Z"
+          canaryStartTime: "2022-10-04T10:10:09Z"
           user: admin
           lifetimeMinutes: "3"
           threshold:
@@ -23,7 +23,7 @@ spec:
             marginal: 60
           services:
           - logTemplateName: stackdriver-validator
-            logTemplateVersion: "v2.0"
+            logTemplateVersion: "v1.0"
             logScopeVariables: "resource.labels.pod_name"
-            baselineLogScope: "sd-ss1-canary-596c596b7d.*"
-            canaryLogScope: "sd-ss1-canary-67d9ddfb45.*"
+            baselineLogScope: "sd-ss1-canary-.*-5zx89"
+            canaryLogScope: "sd-ss1-canary-.*-d7c92"
