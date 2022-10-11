@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: nr-ss1-canary
+  name: nr-ss1-canary-test
 spec:
   replicas: 4
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      app: nr-ss1-app
+      app: nr-ss1-app-test
   template:
     metadata:
       annotations:
@@ -15,10 +15,10 @@ spec:
         prometheus_io_path: '/mgmt/prometheus'
         prometheus_io_port: '8088'    
       labels:
-        app: nr-ss1-app
+        app: nr-ss1-app-test
     spec:
       containers:
-        - name: nr-ss1-app-v1
+        - name: nr-ss1-app-v1-test
           image: quay.io/opsmxpublic/canary-issuegen:issue-canary-gen-1402
           imagePullPolicy: Always
           ports:
@@ -35,7 +35,7 @@ spec:
         - pause: { duration: 60s }
         - analysis:
             templates:
-              - templateName: nr-isd-analysis-ss1-canary
+              - templateName: nr-isd-analysis-ss1-canary-test
             args:
               - name: canary-hash
                 valueFrom:
@@ -47,7 +47,7 @@ spec:
         - pause: { duration: 60s }
         - analysis:
             templates:
-              - templateName: nr-isd-analysis-ss1-canary
+              - templateName: nr-isd-analysis-ss1-canary-test
             args:
               - name: canary-hash
                 valueFrom:
