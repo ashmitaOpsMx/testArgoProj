@@ -1,21 +1,21 @@
 kind: AnalysisTemplate
 apiVersion: argoproj.io/v1alpha1
 metadata:
-  name: nr-isd-analysis-ss1-canary
+  name: nr-isd-analysis-ss1-canary-test
 spec:
   args:
     - name: canary-hash
     - name: baseline-hash
   metrics:
-    - name: nr-isd-analysis-ss1-canary-score
+    - name: nr-isd-analysis-ss1-canary-score-test
       count: 1
       initialDelay: 10s
       provider:
         opsmx:
           gateUrl: https://isd-demo.argo-dev.opsmx.net/
-          application: nr-ss1-canary-app
+          application: nr-ss1-canary-app-test
           user: admin
-          lifetimeMinutes: "3"
+          lifetimeMinutes: 3
           profile: "opsmx-profile-v2"
           threshold:
             pass: 80
