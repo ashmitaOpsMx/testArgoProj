@@ -1,0 +1,53 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: sdnr-ss1-canary
+spec:
+  replicas: 4
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: sdnr-ss1-app
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus_io_path: '/mgmt/prometheus'
+        prometheus_io_port: '8088'    
+      labels:
+        app: sdnr-ss1-app
+    spec:
+      containers:
+        - name: sdnr-ss1-app-v1
+          image: quay.io/opsmxpublic/canary-issuegen:issue-canary-gen-1401
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8088
+  strategy:
+    canary:
+      steps:
+        - setWeight: 25
+        - pause: { duration: 60s }
+        - analysis:
+            templates:
+              - templateName: sdnr-isd-analysis-ss1-canary
+            args:
+              - name: canary-hash
+                valueFrom:
+                  podTemplateHashValue: Latest
+              - name: baseline-hash
+                valueFrom:
+                  podTemplateHashValue: Stable
+        - setWeight: 75
+        - pause: { duration: 60s }
+        - analysis:
+            templates:
+              - templateName: sdnr-isd-analysis-ss1-canary
+            args:
+              - name: canary-hash
+                valueFrom:
+                  podTemplateHashValue: Latest
+              - name: baseline-hash
+                valueFrom:
+                  podTemplateHashValue: Stable
+        - setWeight: 100
