@@ -1,0 +1,29 @@
+kind: AnalysisTemplate
+apiVersion: argoproj.io/v1alpha1
+metadata:
+  name: sdnr-isd-analysis-ss1-canary
+spec:
+  args:
+    - name: canary-hash
+    - name: baseline-hash
+  metrics:
+    - name: sdnr-isd-analysis-ss1-canary-score
+      count: 1
+      initialDelay: 10s
+      provider:
+        opsmx:
+          gateUrl: https://isd-dev.argo-dev.opsmx.net/
+          application: sdnr-ss1-canary-app
+          baselineStartTime: "2022-10-04T10:10:09Z"
+          canaryStartTime: "2022-10-04T10:10:09Z"
+          user: admin
+          lifetimeMinutes: "3"
+          threshold:
+            pass: 80
+            marginal: 60
+          services:
+          - logTemplateName: "stacktemplatemd"
+            logTemplateVersion: "v2.0"
+            logScopeVariables: "resource.labels.pod_name"
+            baselineLogScope: "sd-ss1-canary-.*-5zx89"
+            canaryLogScope: "sd-ss1-canary-.*-d7c92"
