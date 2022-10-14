@@ -13,7 +13,8 @@ spec:
       provider:
         opsmx:
           application: sdnr-isd-analysis-app
-          lifetimeMinutes: "6"
+          profile: opsmx-rollout-profile
+          lifetimeMinutes: 6
           threshold:
             pass: 80
             marginal: 60
