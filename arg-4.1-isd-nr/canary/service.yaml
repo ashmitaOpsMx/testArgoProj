@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: sdnr-ss1-app-svc
+spec:
+  selector:
+    app: sdnr-ss1-app
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8088
