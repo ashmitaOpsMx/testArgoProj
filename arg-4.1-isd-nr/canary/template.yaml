@@ -12,6 +12,7 @@ spec:
       initialDelay: 10s
       provider:
         opsmx:
+          application: sdnr-isd-analysis-app
           lifetimeMinutes: "6"
           threshold:
             pass: 80
