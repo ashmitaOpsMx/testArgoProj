@@ -9,6 +9,7 @@ spec:
   metrics:
     - name: isd-analysis-bg-v1
       count: 1
+      initialDelay: 45s
       provider:
         opsmx:
           application: metrictest
