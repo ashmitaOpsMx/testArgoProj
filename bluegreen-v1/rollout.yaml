@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: rollouts-demo
-        image: argoproj/rollouts-demo:green
+        image: docker.io/opsmxdev/issuegen:v3.0.8
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -29,17 +29,6 @@ spec:
       prePromotionAnalysis:
         templates:
         - templateName: isd-analysis-bg-v1
-        args:
-        - name: baseline-hash
-          valueFrom:
-            podTemplateHashValue: Stable
-        - name: preview-hash
-          valueFrom:
-            podTemplateHashValue: Latest
-      autoPromotionEnabled: false
-      postPromotionAnalysis:
-        templates:
-        - templateName: isd-analysis-bg-post
         args:
         - name: baseline-hash
           valueFrom:
