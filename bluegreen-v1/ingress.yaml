@@ -8,7 +8,7 @@ metadata:
     ingress.kubernetes.io/app-root: /
 spec:
   rules:
-  - host: blue-green.autopilot.opsmx.com
+  - host: blue-green-test.aoa.oes.opsmx.org
     http:
       paths:
       - path: /
