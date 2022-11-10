@@ -11,7 +11,6 @@ spec:
       count: 1
       provider:
         opsmx:
-          gateUrl: https://isd-demo.argo-dev.opsmx.net//
           application: demo-bg-app
           user: admin
           lifetimeHours: "0.05"
