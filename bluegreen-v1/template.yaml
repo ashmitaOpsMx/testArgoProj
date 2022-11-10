@@ -11,16 +11,16 @@ spec:
       count: 1
       provider:
         opsmx:
-          application: demo-bg-app
+          application: metrictest
           user: admin
-          lifetimeHours: "0.05"
+          lifetimeMinutes: 3
           threshold:
             pass: 80
             marginal: 60
           services:
           - serviceName: service1
-            metricTemplateName: PrometheusTemplateTest
-            metricTemplateVersion: "v3.0"
-            metricScopeVariables: "namespace_key,pod_key"
-            baselineMetricScope: "argocd,.*{{args.baseline-hash}}.*" 
-            canaryMetricScope: "argocd,.*{{args.preview-hash}}.*"
+            metricTemplateName: prometheus-health-validator
+            metricTemplateVersion: "v1.0"
+            metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
+            baselineMetricScope: "obs411,.*{{args.baseline-hash}}.*,rollout-bluegreen" 
+            canaryMetricScope: "obs411,.*{{args.preview-hash}}.*,rollout-bluegreen"
