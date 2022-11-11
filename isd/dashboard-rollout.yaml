@@ -3,7 +3,7 @@ kind: Rollout
 metadata:
   name: oes-dashboard
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: oes
