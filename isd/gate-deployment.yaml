@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: oes
+    app.kubernetes.io/managed-by: Helm
+    chart: isdargo-4.1.0
+    component: gate
+    heritage: Helm
+    release: isd411
+  name: oes-gate
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 0
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: oes
+      component: gate
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        checksum/secret: 7e8ee2d093a462cded7af32c220ffda7f526ed551de7f7acf4d31ad0da07df84
+        prometheus.io/scrape: "false"
+        prometheus_io_path: /mgmt/prometheus
+        prometheus_io_port: "8084"
+      creationTimestamp: null
+      labels:
+        app: oes
+        chart: isdargo-4.1.0
+        component: gate
+        heritage: Helm
+        release: isd411
+    spec:
+      containers:
+      - env:
+        - name: spring_profiles_active
+          value: vault,local
+        image: quay.io/opsmxpublic/ubi8-gate:v4.1.1-rc1
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 8084
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 60
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: oes-gate
+        ports:
+        - containerPort: 8084
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          successThreshold: 1
+          tcpSocket:
+            port: 8084
+          timeoutSeconds: 1
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /opt/spinnaker/config/gate.yml
+          name: gate-volume
+          subPath: gate.yml
+        - mountPath: /opt/spinnaker/config/bootstrap.yml
+          name: bootstrap-volume
+          subPath: bootstrap.yml
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: gate-volume
+        secret:
+          defaultMode: 420
+          secretName: oes-gate-config
+      - name: bootstrap-volume
+        secret:
+          defaultMode: 420
+          items:
+          - key: bootstrap.yml
+            path: bootstrap.yml
+          secretName: bootstrap
