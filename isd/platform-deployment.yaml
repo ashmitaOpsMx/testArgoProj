@@ -39,9 +39,9 @@ spec:
         release: isd411
     spec:
       containers:
-      - image: quay.io/opsmxpublic/docker.io/opsmx11/oes-platform:4bd0469c-1933
+      - image: docker.io/opsmx11/oes-platform:4bd0469c-1933
         #docker.io/opsmx11/oes-platform:4bd0469c-1933
-        #ubi8-oes-platform:v4.1.1-rc1
+        #quay.io/opsmxpublic/ubi8-oes-platform:v4.1.1-rc1
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
