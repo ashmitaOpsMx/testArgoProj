@@ -1,0 +1,27 @@
+kind: AnalysisTemplate
+apiVersion: argoproj.io/v1alpha1
+metadata:
+  name: isd-analysis-bg-v1
+spec:
+  args:
+    - name: preview-hash
+    - name: baseline-hash
+  metrics:
+    - name: isd-analysis-bg-v1
+      count: 1
+      initialDelay: 45s
+      provider:
+        opsmx:
+          application: isd411
+          user: admin
+          lifetimeMinutes: 3
+          threshold:
+            pass: 80
+            marginal: 60
+          services:
+          - serviceName: service1
+            metricTemplateName: prometheus-health-validator
+            metricTemplateVersion: "v1.0"
+            metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
+            baselineMetricScope: "isd411,.*{{args.baseline-hash}}.*,oes" 
+            canaryMetricScope: "isd411,.*{{args.preview-hash}}.*,oes"
