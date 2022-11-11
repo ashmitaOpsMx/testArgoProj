@@ -1,0 +1,101 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: oes
+    app.kubernetes.io/managed-by: Helm
+    chart: isdargo-4.1.0
+    component: dashboard
+    heritage: Helm
+    release: isd411
+  name: oes-dashboard
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: oes
+      component: dashboard
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        configmap/checksum: bfdbbd95b11053a548502713f0ae6f99111cd8f853d814981ca6ecf1c31231be
+        prometheus.io/scrape: "true"
+        prometheus_io_path: /mgmt/prometheus
+        prometheus_io_port: "8094"
+      creationTimestamp: null
+      labels:
+        app: oes
+        chart: isdargo-4.1.0
+        component: dashboard
+        heritage: Helm
+        release: isd411
+    spec:
+      containers:
+      - image: quay.io/opsmxpublic/ubi8-oes-dashboard:v4.1.1-rc1
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /mgmt/health
+            port: 8094
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 60
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: oes-dashboard
+        ports:
+        - containerPort: 8094
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          successThreshold: 1
+          tcpSocket:
+            port: 8094
+          timeoutSeconds: 1
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /opsmx/conf/dashboard-local.yml
+          name: dashboard-config
+          subPath: dashboard-local.yml
+        - mountPath: /opsmx/conf/bootstrap.yml
+          name: bootstrap-config-volume
+          subPath: bootstrap.yml
+        - mountPath: /opsmx/conf/standard-error-code.csv
+          name: standard-error-conf
+          subPath: standard-error-codes.csv
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: oes-dashboard-config
+        name: dashboard-config
+      - name: bootstrap-config-volume
+        secret:
+          defaultMode: 420
+          items:
+          - key: bootstrap.yml
+            path: bootstrap.yml
+          secretName: bootstrap
+      - configMap:
+          defaultMode: 420
+          items:
+          - key: standard-error-codes.csv
+            path: standard-error-codes.csv
+          name: standard-error-codes-config
+        name: standard-error-conf
