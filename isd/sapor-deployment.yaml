@@ -1,0 +1,130 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: oes
+    app.kubernetes.io/managed-by: Helm
+    chart: isdargo-4.1.0
+    component: sapor
+    heritage: Helm
+    release: isd411
+  name: oes-sapor
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 0
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: oes
+      component: sapor
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        checksum/configmap: 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a
+        prometheus.io/scrape: "true"
+        prometheus_io_path: /mgmt/prometheus
+        prometheus_io_port: "8085"
+      creationTimestamp: null
+      labels:
+        app: oes
+        chart: isdargo-4.1.0
+        component: sapor
+        heritage: Helm
+        release: isd411
+    spec:
+      containers:
+      - image: quay.io/opsmxpublic/ubi8-oes-sapor:v4.1.1-rc1
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /mgmt/health
+            port: 8085
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: oes-sapor
+        ports:
+        - containerPort: 8085
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 10
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 8085
+          timeoutSeconds: 1
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /opt/opsmx/controller/ca.crt
+          name: ca-certs-volume
+          subPath: tls.crt
+        - mountPath: /opt/opsmx/controller/cert/tls.crt
+          name: certs-volume
+          subPath: tls.crt
+        - mountPath: /opt/opsmx/controller/cert/tls.key
+          name: certs-volume
+          subPath: tls.key
+        - mountPath: /opt/opsmx/application.yml
+          name: sapor-config-volume
+          subPath: application.yml
+        - mountPath: /opt/opsmx/bootstrap.yml
+          name: bootstrap-config-volume
+          subPath: bootstrap.yml
+        - mountPath: /opsmx/conf/standard-error-code.csv
+          name: standard-error-conf
+          subPath: standard-error-codes.csv
+      dnsPolicy: ClusterFirst
+      initContainers:
+      - command:
+        - /bin/bash
+        - -c
+        - sleep 30;echo Waiting for oes-db to be up and running; pg_isready -h oes-db
+          -p 5432 && echo PostgreSQL DB is ready to receive connections
+        image: quay.io/opsmxpublic/postgres:9.6.5
+        imagePullPolicy: IfNotPresent
+        name: db-check
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: certs-volume
+        secret:
+          defaultMode: 420
+          secretName: oes-control-secret
+      - name: ca-certs-volume
+        secret:
+          defaultMode: 420
+          secretName: ca-secret
+      - name: sapor-config-volume
+        secret:
+          defaultMode: 420
+          secretName: oes-sapor-config
+      - name: bootstrap-config-volume
+        secret:
+          defaultMode: 420
+          items:
+          - key: bootstrap.yml
+            path: bootstrap.yml
+          secretName: sapor-bootstrap
+      - configMap:
+          defaultMode: 420
+          items:
+          - key: standard-error-codes.csv
+            path: standard-error-codes.csv
+          name: standard-error-codes-config
+        name: standard-error-conf
