@@ -14,5 +14,6 @@ spec:
     name: oes-platform
   strategy:
     blueGreen:
+      autoPromotionEnabled: false
       activeService: oes-platform-stable
       previewService: oes-platform-review
