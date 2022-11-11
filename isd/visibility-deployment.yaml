@@ -9,7 +9,7 @@ metadata:
     heritage: Helm
     release: isd411
   name: oes-visibility
- spec:
+spec:
   progressDeadlineSeconds: 600
   replicas: 0
   revisionHistoryLimit: 10
