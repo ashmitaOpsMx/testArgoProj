@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1               # Create a rollout resource
+kind: Rollout
+metadata:
+  name: oes-visibility
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oes
+      component: visibility
+  workloadRef:                                 # Reference an existing Deployment using workloadRef field
+    apiVersion: apps/v1
+    kind: Deployment
+    name: oes-visibility
+  strategy:
+    blueGreen:
+      autoPromotionEnabled: false
+      activeService: oes-visibility-stable
+      previewService: oes-visibility-preview
+      prePromotionAnalysis:
+        templates:
+        - templateName: isd-analysis-bg-v1
+        args:
+        - name: baseline-hash
+          valueFrom:
+            podTemplateHashValue: Stable
+        - name: preview-hash
+          valueFrom:
+            podTemplateHashValue: Latest
