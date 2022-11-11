@@ -17,3 +17,13 @@ spec:
       autoPromotionEnabled: false
       activeService: oes-platform-stable
       previewService: oes-platform-review
+      prePromotionAnalysis:
+        templates:
+        - templateName: isd-analysis-bg-v1
+        args:
+        - name: baseline-hash
+          valueFrom:
+            podTemplateHashValue: Stable
+        - name: preview-hash
+          valueFrom:
+            podTemplateHashValue: Latest
