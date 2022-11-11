@@ -78,6 +78,8 @@ spec:
           name: standard-error-conf
           subPath: standard-error-codes.csv
       dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: opsmx11-secret
       initContainers:
       - command:
         - /bin/bash
