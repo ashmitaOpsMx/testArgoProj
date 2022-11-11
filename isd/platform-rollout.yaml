@@ -14,5 +14,5 @@ spec:
     name: oes-platform
   strategy:
     blueGreen:
-      activeService: rollout-bluegreen-active
-      previewService: rollout-bluegreen-preview
+      activeService: oes-platform-stable
+      previewService: oes-platform-review
