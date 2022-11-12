@@ -1,0 +1,31 @@
+# This example demonstrates a Rollout using the blue-green update strategy, which contains a manual
+# gate before promoting the new stack.
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: multins-bg
+spec:
+  replicas: 2
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: rollout-bluegreen
+  template:
+    metadata:
+      labels:
+        app: rollout-bluegreen
+    spec:
+      containers:
+      - name: rollouts-demo
+        image: docker.io/opsmxdev/issuegen:v3.0.6
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+  strategy:
+    blueGreen: 
+      activeService: rollout-bluegreen-active
+      previewService: rollout-bluegreen-preview
+      autoPromotionSeconds: 30
+      prePromotionAnalysis:
+        templates:
+        - templateName: isd

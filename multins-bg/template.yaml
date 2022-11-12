@@ -1,0 +1,24 @@
+kind: AnalysisTemplate
+apiVersion: argoproj.io/v1alpha1
+metadata:
+  name: isd
+spec:
+  metrics:
+    - name: platform
+      count: 1
+      initialDelay: 45s
+      provider:
+        opsmx:
+          application: multins-bg
+          user: admin
+          lifetimeMinutes: 3
+          threshold:
+            pass: 80
+            marginal: 60
+          services:
+          - serviceName: platform
+            metricTemplateName: prometheus-health-validator
+            metricTemplateVersion: "v1.0"
+            metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
+            baselineMetricScope: "obs411,oes-platform.*,oes" 
+            canaryMetricScope: "isd411,oes-platform.*,oes"
