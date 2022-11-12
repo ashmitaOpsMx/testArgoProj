@@ -64,6 +64,8 @@ spec:
           name: datascience-config-volume
           subPath: app-config.yml
       dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: opsmx11-secret
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}
