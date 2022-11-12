@@ -15,7 +15,7 @@ spec:
         opsmx:
           application: multins-bg
           user: admin
-          lifetimeMinutes: 3
+          lifetimeMinutes: 10
           threshold:
             pass: 80
             marginal: 60
