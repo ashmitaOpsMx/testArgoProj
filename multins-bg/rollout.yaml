@@ -29,3 +29,10 @@ spec:
       prePromotionAnalysis:
         templates:
         - templateName: isd
+        args:
+        - name: baseline-ns
+          value: obs411
+        - name: preview-ns
+          value: isd411
+        - name: label-app
+          value: oes

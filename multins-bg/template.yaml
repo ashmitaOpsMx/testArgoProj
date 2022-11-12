@@ -3,6 +3,10 @@ apiVersion: argoproj.io/v1alpha1
 metadata:
   name: isd
 spec:
+  args:
+        - name: baseline-ns
+        - name: preview-ns
+        - name: label-app
   metrics:
     - name: isd
       count: 1
@@ -20,66 +24,66 @@ spec:
             metricTemplateName: prometheus-health-validator
             metricTemplateVersion: "v1.0"
             metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
-            baselineMetricScope: "obs411,oes-platform.*,oes" 
-            canaryMetricScope: "isd411,oes-platform.*,oes"
+            baselineMetricScope: "{{args.baseline-ns}},oes-platform.*,{{args.label-app}}" 
+            canaryMetricScope: "{{args.preview-ns}},oes-platform.*,{{args.label-app}}"
           - serviceName: oes-visibility
             metricTemplateName: prometheus-health-validator
             metricTemplateVersion: "v1.0"
             metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
-            baselineMetricScope: "obs411,oes-visibility.*,oes" 
-            canaryMetricScope: "isd411,oes-visibility.*,oes"
+            baselineMetricScope: "{{args.baseline-ns}},oes-visibility.*,{{args.label-app}}" 
+            canaryMetricScope: "{{args.preview-ns}},oes-visibility.*,{{args.label-app}}"
           - serviceName: oes-gate
             metricTemplateName: prometheus-health-validator
             metricTemplateVersion: "v1.0"
             metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
-            baselineMetricScope: "obs411,oes-gate.*,oes" 
-            canaryMetricScope: "isd411,oes-gate.*,oes"
+            baselineMetricScope: "{{args.baseline-ns}},oes-gate.*,{{args.label-app}}" 
+            canaryMetricScope: "{{args.preview-ns}},oes-gate.*,{{args.label-app}}"
           - serviceName: audit-client
             metricTemplateName: prometheus-health-validator
             metricTemplateVersion: "v1.0"
             metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
-            baselineMetricScope: "obs411,oes-audit-client.*,oes" 
-            canaryMetricScope: "isd411,oes-audit-client.*,oes"
+            baselineMetricScope: "{{args.baseline-ns}},oes-audit-client.*,{{args.label-app}}" 
+            canaryMetricScope: "{{args.preview-ns}},oes-audit-client.*,{{args.label-app}}"
           - serviceName: audit-service
             metricTemplateName: prometheus-health-validator
             metricTemplateVersion: "v1.0"
             metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
-            baselineMetricScope: "obs411,oes-audit-service.*,oes" 
-            canaryMetricScope: "isd411,oes-audit-service.*,oes"
+            baselineMetricScope: "{{args.baseline-ns}},oes-audit-service.*,{{args.label-app}}" 
+            canaryMetricScope: "{{args.preview-ns}},oes-audit-service.*,{{args.label-app}}"
           - serviceName: oes-autopilot
             metricTemplateName: prometheus-health-validator
             metricTemplateVersion: "v1.0"
             metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
-            baselineMetricScope: "obs411,oes-autopilot.*,oes" 
-            canaryMetricScope: "isd411,oes-autopilot.*,oes"
+            baselineMetricScope: "{{args.baseline-ns}},oes-autopilot.*,{{args.label-app}}" 
+            canaryMetricScope: "{{args.preview-ns}},oes-autopilot.*,{{args.label-app}}"
           - serviceName: oes-carina
             metricTemplateName: prometheus-health-validator
             metricTemplateVersion: "v1.0"
             metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
-            baselineMetricScope: "obs411,oes-carina.*,oes" 
-            canaryMetricScope: "isd411,oes-carina.*,oes"
+            baselineMetricScope: "{{args.baseline-ns}},oes-carina.*,{{args.label-app}}" 
+            canaryMetricScope: "{{args.preview-ns}},oes-carina.*,{{args.label-app}}"
           - serviceName: oes-dashboard
             metricTemplateName: prometheus-health-validator
             metricTemplateVersion: "v1.0"
             metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
-            baselineMetricScope: "obs411,oes-dashboard.*,oes" 
-            canaryMetricScope: "isd411,oes-dashboard.*,oes"
+            baselineMetricScope: "{{args.baseline-ns}},oes-dashboard.*,{{args.label-app}}" 
+            canaryMetricScope: "{{args.preview-ns}},oes-dashboard.*,{{args.label-app}}"
           - serviceName: oes-datascience
             metricTemplateName: prometheus-health-validator
             metricTemplateVersion: "v1.0"
             metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
-            baselineMetricScope: "obs411,oes-datascience.*,oes" 
-            canaryMetricScope: "isd411,oes-datascience.*,oes"
+            baselineMetricScope: "{{args.baseline-ns}},oes-datascience.*,{{args.label-app}}" 
+            canaryMetricScope: "{{args.preview-ns}},oes-datascience.*,{{args.label-app}}"
           - serviceName: oes-sapor
             metricTemplateName: prometheus-health-validator
             metricTemplateVersion: "v1.0"
             metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
-            baselineMetricScope: "obs411,oes-sapor.*,oes" 
-            canaryMetricScope: "isd411,oes-sapor.*,oes"
+            baselineMetricScope: "{{args.baseline-ns}},oes-sapor.*,{{args.label-app}}" 
+            canaryMetricScope: "{{args.preview-ns}},oes-sapor.*,{{args.label-app}}"
           - serviceName: oes-ui
             metricTemplateName: prometheus-health-validator
             metricTemplateVersion: "v1.0"
             metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
-            baselineMetricScope: "obs411,oes-ui.*,oes" 
-            canaryMetricScope: "isd411,oes-ui.*,oes"
+            baselineMetricScope: "{{args.baseline-ns}},oes-ui.*,{{args.label-app}}" 
+            canaryMetricScope: "{{args.preview-ns}},oes-ui.*,{{args.label-app}}"
 
