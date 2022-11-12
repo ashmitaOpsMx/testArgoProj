@@ -4,7 +4,7 @@ metadata:
   name: isd
 spec:
   metrics:
-    - name: platform
+    - name: isd
       count: 1
       initialDelay: 45s
       provider:
@@ -16,15 +16,70 @@ spec:
             pass: 80
             marginal: 60
           services:
-          - serviceName: platform
+          - serviceName: oes-platform
             metricTemplateName: prometheus-health-validator
             metricTemplateVersion: "v1.0"
             metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
             baselineMetricScope: "obs411,oes-platform.*,oes" 
             canaryMetricScope: "isd411,oes-platform.*,oes"
-          - serviceName: visibility
+          - serviceName: oes-visibility
             metricTemplateName: prometheus-health-validator
             metricTemplateVersion: "v1.0"
             metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
             baselineMetricScope: "obs411,oes-visibility.*,oes" 
             canaryMetricScope: "isd411,oes-visibility.*,oes"
+          - serviceName: oes-gate
+            metricTemplateName: prometheus-health-validator
+            metricTemplateVersion: "v1.0"
+            metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
+            baselineMetricScope: "obs411,oes-gate.*,oes" 
+            canaryMetricScope: "isd411,oes-gate.*,oes"
+          - serviceName: audit-client
+            metricTemplateName: prometheus-health-validator
+            metricTemplateVersion: "v1.0"
+            metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
+            baselineMetricScope: "obs411,oes-audit-client.*,oes" 
+            canaryMetricScope: "isd411,oes-audit-client.*,oes"
+          - serviceName: audit-service
+            metricTemplateName: prometheus-health-validator
+            metricTemplateVersion: "v1.0"
+            metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
+            baselineMetricScope: "obs411,oes-audit-service.*,oes" 
+            canaryMetricScope: "isd411,oes-audit-service.*,oes"
+          - serviceName: oes-autopilot
+            metricTemplateName: prometheus-health-validator
+            metricTemplateVersion: "v1.0"
+            metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
+            baselineMetricScope: "obs411,oes-autopilot.*,oes" 
+            canaryMetricScope: "isd411,oes-autopilot.*,oes"
+          - serviceName: oes-carina
+            metricTemplateName: prometheus-health-validator
+            metricTemplateVersion: "v1.0"
+            metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
+            baselineMetricScope: "obs411,oes-carina.*,oes" 
+            canaryMetricScope: "isd411,oes-carina.*,oes"
+          - serviceName: oes-dashboard
+            metricTemplateName: prometheus-health-validator
+            metricTemplateVersion: "v1.0"
+            metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
+            baselineMetricScope: "obs411,oes-dashboard.*,oes" 
+            canaryMetricScope: "isd411,oes-dashboard.*,oes"
+          - serviceName: oes-datascience
+            metricTemplateName: prometheus-health-validator
+            metricTemplateVersion: "v1.0"
+            metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
+            baselineMetricScope: "obs411,oes-datascience.*,oes" 
+            canaryMetricScope: "isd411,oes-datascience.*,oes"
+          - serviceName: oes-sapor
+            metricTemplateName: prometheus-health-validator
+            metricTemplateVersion: "v1.0"
+            metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
+            baselineMetricScope: "obs411,oes-sapor.*,oes" 
+            canaryMetricScope: "isd411,oes-sapor.*,oes"
+          - serviceName: oes-ui
+            metricTemplateName: prometheus-health-validator
+            metricTemplateVersion: "v1.0"
+            metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
+            baselineMetricScope: "obs411,oes-ui.*,oes" 
+            canaryMetricScope: "isd411,oes-ui.*,oes"
+
