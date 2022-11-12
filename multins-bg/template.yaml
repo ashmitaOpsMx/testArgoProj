@@ -22,3 +22,9 @@ spec:
             metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
             baselineMetricScope: "obs411,oes-platform.*,oes" 
             canaryMetricScope: "isd411,oes-platform.*,oes"
+          - serviceName: visibility
+            metricTemplateName: prometheus-health-validator
+            metricTemplateVersion: "v1.0"
+            metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
+            baselineMetricScope: "obs411,oes-visibility.*,oes" 
+            canaryMetricScope: "isd411,oes-visibility.*,oes"
