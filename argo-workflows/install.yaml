@@ -1063,7 +1063,7 @@ value: 1000000
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: argo-workflow-server
+  name: argo-server
   
 spec:
   selector:
