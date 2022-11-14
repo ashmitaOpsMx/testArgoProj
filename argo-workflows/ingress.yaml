@@ -1,6 +1,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  annotations: 
+    cert-manager.io/cluster-issuer: letsencrypt-obs411-argocd
+    kubernetes.io/ingress.class: nginx
   name: argo-workflows-ingress
 spec:
   rules:
