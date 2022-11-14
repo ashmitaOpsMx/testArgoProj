@@ -1050,7 +1050,7 @@ value: 1000000
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: argo-server
+  name: argo-workflow-server
   namespace: argo
 spec:
   selector:
@@ -1064,6 +1064,7 @@ spec:
       containers:
       - args:
         - server
+        - --auth-mode=sso
         env: []
         image: quay.io/argoproj/argocli:v3.3.8
         name: argo-server
