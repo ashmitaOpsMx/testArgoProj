@@ -1006,6 +1006,17 @@ kind: ConfigMap
 metadata:
   name: workflow-controller-configmap
   namespace: argo
+data:
+   sso: |
+    issuer: https://argo-cd.mydomain.com/api/dex
+    clientId:
+      name: argo-workflows-sso
+      key: client-id
+    clientSecret:
+      name: argo-workflows-sso
+      key: client-secret
+    redirectUrl: https://argo-workflows.argo.opsmx.net/oauth2/callback
+  
 ---
 apiVersion: v1
 kind: Service
