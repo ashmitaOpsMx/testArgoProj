@@ -986,6 +986,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: argo
+  namespace: obs411
   
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -999,6 +1000,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: argo-server
+  namespace: obs411
   
 ---
 apiVersion: v1
