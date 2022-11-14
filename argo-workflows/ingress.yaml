@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argo-workflows-ingress
+  namespace: argo-workflows
+spec:
+  rules:
+  - host: argo-workflows.aoa.oes.opsmx.org
+    http:
+      paths:
+      - backend:
+          service:
+            name: argo-workflows-server
+            port:
+              number: 2746
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - argo-workflows.aoa.oes.opsmx.org
+    secretName: argoc-workflow-tls-certificate
