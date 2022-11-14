@@ -1076,9 +1076,20 @@ spec:
     spec:
       containers:
       - args:
+        - --configmap=workflow-controller-configmap
         - server
+        - secure=false
         - --auth-mode=sso
-        env: []
+        env:
+        - name: IN_CLUSTER
+          value: "true"
+        - name: ARGO_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: BASE_HREF
+          value: /
         image: quay.io/argoproj/argocli:v3.3.8
         name: argo-server
         ports:
@@ -1088,7 +1099,7 @@ spec:
           httpGet:
             path: /
             port: 2746
-            scheme: HTTPS
+            scheme: HTTP
           initialDelaySeconds: 10
           periodSeconds: 20
         securityContext:
