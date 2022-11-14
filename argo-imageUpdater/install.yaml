@@ -58,6 +58,12 @@ subjects:
   name: argocd-image-updater
 ---
 apiVersion: v1
+  applications_api: argocd
+  argocd.grpc_web: "true"
+  argocd.insecure: "false"
+  argocd.plaintext: "false"
+  argocd.server_addr: argocd411.aoa.oes.opsmx.org
+  log.level: debug
 kind: ConfigMap
 metadata:
   labels:
