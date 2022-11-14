@@ -1008,14 +1008,14 @@ metadata:
   namespace: argo
 data:
    sso: |
-    issuer: https://argo-cd.mydomain.com/api/dex
+    issuer: https://argocd411.aoa.oes.opsmx.org/api/dex
     clientId:
       name: argo-workflows-sso
       key: client-id
     clientSecret:
       name: argo-workflows-sso
       key: client-secret
-    redirectUrl: https://argo-workflows.argo.opsmx.net/oauth2/callback
+    redirectUrl: https://argo-workflows.aoa.oes.opsmx.org/oauth2/callback
   
 ---
 apiVersion: v1
