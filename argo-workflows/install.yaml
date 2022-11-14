@@ -1077,7 +1077,7 @@ spec:
       - args:
         - server
         - --configmap=workflow-controller-configmap
-        - secure=false
+        - --secure=false
         - --auth-mode=sso
         env:
         - name: IN_CLUSTER
