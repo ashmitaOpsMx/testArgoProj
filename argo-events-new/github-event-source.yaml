@@ -20,6 +20,7 @@ spec:
             - Analytics
             - oes-api
             - platform-service
+            - dashboard-service
       # Github application auth. Instead of using personal token `apiToken` use app PEM            
 #     githubApp:
 #       privateKey:
