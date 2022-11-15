@@ -42,43 +42,71 @@ spec:
               apiVersion: argoproj.io/v1alpha1
               kind: Workflow
               metadata:
-                generateName: github-
+                generateName: trigger-jenkins-
               spec:
-                entrypoint: whalesay
                 arguments:
                   parameters:
-                    - name: pr-title
-                    - name: pr-number
-                    - name: short-sha
+                    - name: repo
+                    - name: branch
+                    - name: prnumber
+                entrypoint: git
                 templates:
-                  - name: whalesay
-                    inputs:
-                      parameters:
-                        - name: pr-title
-                        - name: pr-number
-                        - name: short-sha
-                    container:
-                      image: docker/whalesay:latest
-                      command: [cowsay]
-                      args: ["{{inputs.parameters.pr-title}}"]
+                  - name: git
+                    steps:
+                      - - name: curl
+                          template: curl
+                  - container:
+                      args:
+                        - >-
+                          cd /usr/src; echo $secret ; pwd; ls -ltr; export
+                          repo="{{workflow.parameters.repo}}" ; export
+                          branch="{{workflow.parameters.branch}}" ; gitdir=$(echo
+                          $repo | sed 's/.git$//' | sed 's/\// /g' | awk '{print
+                          $NF}'); echo $gitdir is gitrepo; echo $branch is gitbranch;  
+                          curl -u $secret -X POST "https://jenkins.opsmx.net:8181/jenkins/job/Dev-$gitdir-forargo/buildWithParameters?token=argocd-jenkins-token&BRANCHNAME=origin/$branch" ; 
+                          if [  $? -eq 0 ];
+                           then echo build succeeded;
+                           else echo build failed; exit 1;
+                          fi;
+                          cd /usr/src ; export
+                          repo="{{workflow.parameters.repo}}" ;  echo $repo is the repo; export
+                          gitprnum="{{workflow.parameters.prnumber}}"; echo $repo is the repo;
+                          gitdir=$(echo $repo | sed 's/.git$//' | sed 's/\// /g'
+                          | awk '{print $NF}');
+                          gitowner=opsmx; echo commenting on
+                          $gitowner $gitdir ; curl -u ${gitcreds} -X POST
+                          "https://api.github.com/repos/${gitowner}/${gitdir}/issues/${gitprnum}/comments" 
+                          -H "Content-type: application/json" -d '{"body":"This
+                          PR is successfully built"}'; if [  $? -eq 0 ]; then
+                          echo post succeeded; else echo post failed; fi
+                      command:
+                        - bash
+                        - '-c'
+                      env:
+                        - name: gitcreds
+                          valueFrom:
+                            secretKeyRef:
+                              key: gitcreds
+                              name: gitcreds
+                        - name: secret
+                          valueFrom:
+                            secretKeyRef:
+                              key: creds
+                              name: jenkins-secret
+                      image: 'maven:3-openjdk-11'
+                    name: curl
           parameters:
             - src:
                 dependencyName: test-dep
-                dataKey: body.pull_request.title
+                dataKey: body.pull_request.head.repo.html_url
               dest: spec.arguments.parameters.0.value
             - src:
                 dependencyName: test-dep
-                dataKey: body.pull_request.number
+                dataKey: body.pull_request.head.ref
               dest: spec.arguments.parameters.1.value
             - src:
                 dependencyName: test-dep
-                dataTemplate: "{{ .Input.body.pull_request.head.sha | substr 0 7 }}"
+                dataKey: body.pull_request.number
               dest: spec.arguments.parameters.2.value
-            # Append pull request number and short sha to dynamically assign workflow name <github-21500-2c065a>
-            - src:
-                dependencyName: test-dep
-                dataTemplate: "{{ .Input.body.pull_request.number }}-{{ .Input.body.pull_request.head.sha | substr 0 7 }}"
-              dest: metadata.name
-              operation: append
       retryStrategy:
         steps: 3
