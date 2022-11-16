@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: oes-autopilot
   labels:
     app: oes
     app.kubernetes.io/managed-by: Helm
