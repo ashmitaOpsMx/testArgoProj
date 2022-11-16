@@ -22,6 +22,7 @@ spec:
             - platform-service
             - dashboard-service
             - audit-client-service
+            - visibility-service
       # Github application auth. Instead of using personal token `apiToken` use app PEM            
 #     githubApp:
 #       privateKey:
