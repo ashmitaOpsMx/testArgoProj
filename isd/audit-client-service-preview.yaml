@@ -10,9 +10,6 @@ metadata:
     release: isd411
   name: oes-audit-client-preview
 spec:
-  clusterIP: 10.51.254.252
-  clusterIPs:
-  - 10.51.254.252
   ipFamilies:
   - IPv4
   ipFamilyPolicy: SingleStack
