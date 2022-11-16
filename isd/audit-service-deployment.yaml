@@ -38,7 +38,7 @@ spec:
         release: isd411
     spec:
       containers:
-      - image: quay.io/opsmxpublic/ubi8-oes-audit-service:v4.1.1-rc1
+      - image: docker.io/opsmx11/oes-audit-service:argo-4a69860-1
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
