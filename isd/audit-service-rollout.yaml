@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: oes
-      component: audit-service
+      component: auditservice
   workloadRef:                                 # Reference an existing Deployment using workloadRef field
     apiVersion: apps/v1
     kind: Deployment
