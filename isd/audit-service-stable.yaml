@@ -10,12 +10,6 @@ metadata:
     release: isd411
   name: oes-audit-service-stable
 spec:
-  clusterIP: 10.51.255.198
-  clusterIPs:
-  - 10.51.255.198
-  ipFamilies:
-  - IPv4
-  ipFamilyPolicy: SingleStack
   ports:
   - name: auditservice
     port: 8097
