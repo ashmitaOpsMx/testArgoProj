@@ -16,8 +16,7 @@ spec:
     example:
       repositories:
         - owner: opsmx
-          names:
-            - Analytics
+          names:            
             - oes-api
             - platform-service
             - dashboard-service
