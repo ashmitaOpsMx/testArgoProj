@@ -10,12 +10,6 @@ metadata:
     release: isd411
   name: oes-datascience-stable
 spec:
-  clusterIP: 10.51.251.183
-  clusterIPs:
-  - 10.51.251.183
-  ipFamilies:
-  - IPv4
-  ipFamilyPolicy: SingleStack
   ports:
   - name: datascience
     port: 5005
