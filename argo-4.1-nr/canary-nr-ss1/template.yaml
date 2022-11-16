@@ -16,7 +16,6 @@ spec:
           application: nr-ss1-canary-app-test
           user: admin
           lifetimeMinutes: 3
-          profile: "opsmx-profile-v2"
           threshold:
             pass: 80
             marginal: 60
