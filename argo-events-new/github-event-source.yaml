@@ -24,6 +24,7 @@ spec:
             - visibility-service
             - audit-service
             - gate
+            - oes-ui
       # Github application auth. Instead of using personal token `apiToken` use app PEM            
 #     githubApp:
 #       privateKey:
