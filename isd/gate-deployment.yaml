@@ -76,6 +76,8 @@ spec:
           name: bootstrap-volume
           subPath: bootstrap.yml
       dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: opsmx11-secret
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}
