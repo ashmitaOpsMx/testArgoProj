@@ -38,7 +38,7 @@ spec:
         release: isd411
     spec:
       containers:
-      - image: docker.io/opsmx11/oes-audit-client:argo-1ebd160-16
+      - image: docker.io/opsmx11/oes-audit-client:argo-c8d50a4-23
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
