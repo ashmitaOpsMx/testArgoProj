@@ -41,7 +41,7 @@ spec:
       - env:
         - name: spring_profiles_active
           value: vault,local
-        image: quay.io/opsmxpublic/ubi8-gate:v4.1.1-rc1
+        image: opsmx11/gate:argo-c175444c-2
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
