@@ -27,3 +27,9 @@ spec:
         - name: preview-hash
           valueFrom:
             podTemplateHashValue: Latest
+        - name: servicename
+          valueFrom: 
+            fieldRef:
+              fieldPath: metadata.name
+          
+         
