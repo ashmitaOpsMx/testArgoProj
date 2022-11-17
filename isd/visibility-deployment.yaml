@@ -37,7 +37,7 @@ spec:
         release: isd411
     spec:
       containers:
-      - image: opsmx11/oes-visibility:argo-f91bc80-5
+      - image: docker.io/opsmx11/oes-visibility:argo-f91bc80-5
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
