@@ -38,7 +38,7 @@ spec:
         release: isd411
     spec:
       containers:
-      - image: opsmx11/oes-dashboard:argo-7e717ef-2
+      - image: docker.io/opsmx11/oes-dashboard:argo-7e717ef-2
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3

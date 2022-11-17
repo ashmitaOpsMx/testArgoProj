@@ -38,7 +38,7 @@ spec:
         release: isd411
     spec:
       containers:
-      - image: opsmx11/oes-autopilot:argo-47e0e9e1a-2
+      - image: docker.io/opsmx11/oes-autopilot:argo-47e0e9e1a-2
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3

@@ -41,7 +41,7 @@ spec:
       - env:
         - name: spring_profiles_active
           value: vault,local
-        image: opsmx11/gate:argo-c175444c-2
+        image: docker.io/opsmx11/gate:argo-c175444c-2
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
