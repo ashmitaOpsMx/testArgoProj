@@ -3,10 +3,10 @@ kind: Rollout
 metadata:
   name: oes-audit-client
   annotations:
-    notifications.argoproj.io/subscribe.on-rollout-completed.slack: argo-in-dev-process
-    notifications.argoproj.io/subscribe.on-rollout-aborted.slack: argo-in-dev-process
-    notifications.argoproj.io/subscribe.on-analysis-run-failed.slack: argo-in-dev-process
-    notifications.argoproj.io/subscribe.on-analysis-run-error.slack: argo-in-dev-process
+    notifications.argoproj.io/subscribe.on-rollout-completed.slack: argonotifications-test
+    notifications.argoproj.io/subscribe.on-rollout-aborted.slack: argonotifications-test
+    notifications.argoproj.io/subscribe.on-analysis-run-failed.slack: argonotifications-test
+    notifications.argoproj.io/subscribe.on-analysis-run-error.slack: argonotifications-test
 spec:
   replicas: 1
   selector:
