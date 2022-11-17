@@ -6,6 +6,7 @@ spec:
   args:
     - name: preview-hash
     - name: baseline-hash
+    - name: servicename
   metrics:
     - name: isd-analysis-bg-v1
       count: 1
@@ -19,7 +20,7 @@ spec:
             pass: 80
             marginal: 60
           services:
-          - serviceName: service1
+          - serviceName: {{args.servicename}}
             metricTemplateName: prometheus-health-validator
             metricTemplateVersion: "v1.0"
             metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
