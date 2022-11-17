@@ -38,7 +38,7 @@ spec:
         release: isd411
     spec:
       containers:
-      - image: opsmx11/sapor:argo-02116a7a3fc12f947e0fd7dbd524d1afa8221a30-4
+      - image: docker.io/opsmx11/sapor:argo-02116a7a3fc12f947e0fd7dbd524d1afa8221a30-4
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 10
