@@ -58,27 +58,45 @@ spec:
                   - container:
                       args:
                         - >-
-                          cd /usr/src; echo $secret ; pwd; ls -ltr; export
-                          repo="{{workflow.parameters.repo}}" ; export
-                          branch="{{workflow.parameters.branch}}" ; gitdir=$(echo
-                          $repo | sed 's/.git$//' | sed 's/\// /g' | awk '{print
-                          $NF}'); echo $gitdir is gitrepo; echo $branch is gitbranch;  
-                          curl -u $secret -X POST "https://jenkins.opsmx.net:8181/jenkins/job/Dev-$gitdir-forargo/buildWithParameters?token=argocd-jenkins-token&BRANCHNAME=origin/$branch" ; 
+                          cd /usr/src; 
+                          export repo="{{workflow.parameters.repo}}" ; 
+                          export branch="{{workflow.parameters.branch}}" ; 
+                          export gitprnum="{{workflow.parameters.prnumber}}"; 
+                          echo $repo is the repo;
+                          echo $branch is gitbranch; 
+                          echo $gitprnum is the gitprnum;  
+                          gitdir=$(echo $repo | sed 's/.git$//' | sed 's/\// /g' | awk '{print $NF}');
+                           echo $gitdir is gitrepo; 
+                          curl -s -i -u $secret -X POST "https://jenkins.opsmx.net:8181/jenkins/job/Dev-$gitdir-forargo/buildWithParameters?token=argocd-jenkins-token&BRANCHNAME=origin/$branch" -o /tmp/temp.out ; 
                           if [  $? -eq 0 ];
                            then echo build succeeded;
                            else echo build failed; exit 1;
                           fi;
-                          cd /usr/src ; export
-                          repo="{{workflow.parameters.repo}}" ;  echo $repo is the repo; export
-                          gitprnum="{{workflow.parameters.prnumber}}"; echo $repo is the repo;
-                          gitdir=$(echo $repo | sed 's/.git$//' | sed 's/\// /g'
-                          | awk '{print $NF}');
-                          gitowner=opsmx; echo commenting on
-                          $gitowner $gitdir ; curl -u ${gitcreds} -X POST
-                          "https://api.github.com/repos/${gitowner}/${gitdir}/issues/${gitprnum}/comments" 
-                          -H "Content-type: application/json" -d '{"body":"This
-                          PR is successfully built"}'; if [  $? -eq 0 ]; then
-                          echo post succeeded; else echo post failed; fi
+                          gitowner=opsmx; 
+                          echo commenting on $gitowner $gitdir ;
+                          tempurl=$(cat /tmp/temp.out | grep ^Location | awk '{print $2}'| tr -d '\r');
+                          apiurl=$(echo "$tempurl"api/xml);
+                          echo getting build number from $apiurl;
+
+
+                          while true ;
+                          do
+                          if [ -z "$buildurl" ];
+                           then 
+                          sleep 5;
+                          echo still waiting for build to be queued;
+                          curl -s -u $secret "$apiurl" -o /tmp/temp.xml;
+                          buildurl=$(xmllint --xpath 'string(/leftItem/executable/url)' /tmp/temp.xml);
+                           else
+                          break;
+                          fi;
+                          done;
+                          echo from jenkins $buildurl is buildurl;
+                          echo build started;
+
+                          curl -s -u ${gitcreds} -X POST "https://api.github.com/repos/${gitowner}/${gitdir}/issues/${gitprnum}/comments" -H "Content-type: application/json" -d '{"body":"This PR successfully triggered this build '$buildurl'"}'; 
+                           if [  $? -eq 0 ]; then
+                          echo post succeeded; else echo post failed; fi;
                       command:
                         - bash
                         - '-c'
