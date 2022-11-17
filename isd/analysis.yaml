@@ -20,7 +20,7 @@ spec:
             pass: 80
             marginal: 60
           services:
-          - serviceName: {{args.servicename}}
+          - serviceName: "{{args.servicename}}"
             metricTemplateName: prometheus-health-validator
             metricTemplateVersion: "v1.0"
             metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
