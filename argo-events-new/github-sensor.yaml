@@ -111,7 +111,7 @@ spec:
                             secretKeyRef:
                               key: creds
                               name: jenkins-secret
-                      image: 'maven:3-openjdk-11'
+                      image: 'quay.io/opsmxpublic/maven-java-xmllint:v1'
                     name: curl
           parameters:
             - src:
