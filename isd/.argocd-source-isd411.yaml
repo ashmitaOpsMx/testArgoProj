@@ -1,6 +1,6 @@
 kustomize:
   images:
-  - docker.io/opsmx11/oes-audit-client:argo-c8d50a4-23
+  - docker.io/opsmx11/oes-audit-client:argo-c8d50a4-24
   - docker.io/opsmx11/oes-audit-service:argo-4a69860-5
   - docker.io/opsmx11/oes-platform:argo-37acf92c-11
   - docker.io/opsmx11/oes-dashboard:argo-9945719-3
