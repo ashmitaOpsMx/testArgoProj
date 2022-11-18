@@ -1,0 +1,53 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: load-executor-job
+spec:
+  metrics:
+    - name: test
+      provider:
+        job:
+          spec:
+            template:
+              spec:
+                restartPolicy: Never
+                containers:
+                  command: ["bash","-c"]
+                  env:
+                    - name: secret
+                      valueFrom:
+                        secretKeyRef:
+                          key: creds
+                          name: jenkins-secret
+                  image: 'quay.io/opsmxpublic/maven-java-xmllint:v1'
+                  name: curl
+                  args:
+                   - >-
+                          jobname=Dev-triggered-by-argocd;
+                          curl -s -i -u $secret -X POST "https://jenkins.opsmx.net:8181/jenkins/job/$jobname/build?token=argocd-jenkins-token" -o /tmp/temp.out ; 
+                          if [  $? -eq 0 ];
+                           then echo build succeeded;
+                           else echo build failed; exit 1;
+                          fi;
+                          tempurl=$(cat /tmp/temp.out | grep ^Location | awk '{print $2}'| tr -d '\r');
+                          if [ -z "$tempurl" ];
+                           then
+                          echo failed to trigger build;
+                          exit 1;
+                           fi;
+                          apiurl=$(echo "$tempurl"api/xml);
+                          echo getting build number from $apiurl;
+                          while true ;
+                          do
+                          if [ -z "$buildurl" ];
+                           then 
+                          sleep 5;
+                          echo still waiting for build to be queued;
+                          curl -s -u $secret "$apiurl" -o /tmp/temp.xml;
+                          buildurl=$(xmllint --xpath 'string(/leftItem/executable/url)' /tmp/temp.xml);
+                           else
+                          break;
+                          fi;
+                          done;
+                          echo from jenkins $buildurl is buildurl;
+                          echo build started;
