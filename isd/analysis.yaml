@@ -10,7 +10,7 @@ spec:
   metrics:
     - name: isd-analysis-bg-v1
       count: 1
-      initialDelay: 45s
+      initialDelay: 120s
       provider:
         opsmx:
           application: isd411
