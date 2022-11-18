@@ -36,5 +36,5 @@ spec:
           valueFrom: 
             fieldRef:
               fieldPath: metadata.name
-          
+        - templateName: load-executor-job
          
