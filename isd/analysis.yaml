@@ -22,7 +22,7 @@ spec:
           services:
           - serviceName: "{{args.servicename}}"
             metricTemplateName: prometheus-health-validator
-            metricTemplateVersion: "v1.0"
+            metricTemplateVersion: "v2.0"
             metricScopeVariables: "${namespace_key},${pod_key},${app_name}"
             baselineMetricScope: "isd411,.*{{args.baseline-hash}}.*,oes" 
             canaryMetricScope: "isd411,.*{{args.preview-hash}}.*,oes"
