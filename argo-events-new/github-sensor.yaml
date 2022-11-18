@@ -75,6 +75,11 @@ spec:
                           gitowner=opsmx; 
                           echo commenting on $gitowner $gitdir ;
                           tempurl=$(cat /tmp/temp.out | grep ^Location | awk '{print $2}'| tr -d '\r');
+                          if [ -z "$tempurl" ];
+                           then
+                          echo failed to trigger build;
+                          exit 1;
+                          fi;
                           apiurl=$(echo "$tempurl"api/xml);
                           echo getting build number from $apiurl;
 
