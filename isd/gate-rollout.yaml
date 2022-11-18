@@ -2,6 +2,11 @@ apiVersion: argoproj.io/v1alpha1               # Create a rollout resource
 kind: Rollout
 metadata:
   name: oes-gate
+  annotations:
+    notifications.argoproj.io/subscribe.on-rollout-completed.slack: argo-in-dev-process
+    notifications.argoproj.io/subscribe.on-rollout-aborted.slack: argo-in-dev-process
+    notifications.argoproj.io/subscribe.on-analysis-run-failed.slack: argo-in-dev-process
+    notifications.argoproj.io/subscribe.on-analysis-run-error.slack: argo-in-dev-process
 spec:
   replicas: 1
   selector:
