@@ -16,7 +16,7 @@ spec:
       spec:
         containers:
         - name: baseline
-          image: quay.io/opsmxpublic/canary-issuegen:issue-canary-gen-1402
+          image: quay.io/opsmxpublic/canary-issuegen:issue-canary-gen-1401
           imagePullPolicy: Always
           ports:
             - containerPort: 8088
